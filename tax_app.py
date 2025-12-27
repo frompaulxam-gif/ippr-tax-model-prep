@@ -8,7 +8,7 @@ class TaxModelFrame(wx.Frame):
         self.panel = wx.Panel(self)
         self.main_sizer = wx.BoxSizer(wx.VERTICAL)
 
-        # 1. SETUP INPUTS
+        # SETUP INPUTS
         input_box = wx.StaticBox(self.panel, label="Policy Inputs")
         input_sizer = wx.StaticBoxSizer(input_box, wx.VERTICAL)
         
@@ -23,7 +23,7 @@ class TaxModelFrame(wx.Frame):
 
         self.main_sizer.Add(input_sizer, 0, wx.EXPAND|wx.ALL, 10)
 
-        # 2. SETUP RESULTS
+        # SETUP OUTPUT DISPLAY
         result_box = wx.StaticBox(self.panel, label="Simulation Results")
         result_sizer = wx.StaticBoxSizer(result_box, wx.VERTICAL)
         
@@ -38,7 +38,7 @@ class TaxModelFrame(wx.Frame):
         result_sizer.Add(self.result_label, 1, wx.EXPAND|wx.ALL, 20)
         self.main_sizer.Add(result_sizer, 1, wx.EXPAND|wx.ALL, 10)
 
-        # 3. SETUP BUTTON
+        # 3. CALCULATE BUTTON
         calc_btn = wx.Button(self.panel, label="Run Simulation")
         calc_btn.Bind(wx.EVT_BUTTON, self.on_calculate)
         self.main_sizer.Add(calc_btn, 0, wx.ALIGN_CENTER|wx.BOTTOM, 20)
@@ -56,11 +56,11 @@ class TaxModelFrame(wx.Frame):
             rules = DEFAULT_RULES.copy()
             rules['basic_rate'] = custom_rate
             
-            # UPDATED: We now unpack two values (Tax and NI)
+            # Calculate tax and NI
             income_tax, ni_due = calculate_tax(income, rules)
             net_income = income - income_tax - ni_due
             
-            # UPDATED: Display breakdown
+            # Display results
             res_text = (
                 f"Basic Rate Used: {int(custom_rate*100)}%\n\n"
                 f"Income Tax: £{income_tax:,.2f}\n"

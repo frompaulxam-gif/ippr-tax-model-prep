@@ -54,7 +54,7 @@ def calculate_breakdown(income, rules=DEFAULT_RULES):
 
     return pd.Series([tax, ni, income - tax - ni])
 
-# UPDATED HELPER: Returns separate values (tax, ni) instead of just the total
+# Returns separate values (tax, ni) instead of just the total
 def calculate_tax(income, rules=DEFAULT_RULES):
     results = calculate_breakdown(income, rules)
     return results[0], results[1] # returns (tax, ni)
